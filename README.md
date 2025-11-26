@@ -1,4 +1,4 @@
-# RAS – Rede Alerta Solidária 
+# RAS – Rede de Alertas Solidária 
 
 O **RAS (Rede Alerta Solidária)** é um protótipo de aplicativo web inspirado no conceito do Waze, mas focado em **desastres naturais** e seus impactos sociais.
 
