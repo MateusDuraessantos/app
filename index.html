@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>APP - RAS (Rede de Alertas Solidária)</title>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="popup__zoom slowFade--open" id="zoom">
+      
+      <input type="date" class="mapa__data" />
+      
+      <img class="popup__zoom--img" src="./assets/imagens/mapa.jpg" loading="lazy" alt="">
+    </div>
+    <div class="cellBtns">
+      <button class=""><img src="./assets/icones/menu.svg" alt=""></button>
+      <button class=""><img src="./assets/icones/home.svg" alt=""></button>
+      <button class=""><img src="./assets/icones/arrowLeft.svg" alt=""></button>
+    </div>
+  </div>
+</body>
+
+<script type="module">
+import { addHeader } from './components/header.js'
+
+const addDragAndDrop = () => {
+  
+  const zoomContainer = document.getElementById('zoom')
+  const zoomImg = zoomContainer.querySelector('img')
+  console.log('zoomImg', zoomImg);
+  
+
+  let isDragging = false
+  let startX = 0
+  let startY = 0
+  let translateX = 0
+  let translateY = 0
+  let scale = 1
+  function applyTransform() {
+    zoomImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`
+  }
+
+  zoomContainer.addEventListener('mousedown', (e) => {
+    isDragging = true
+    startX = e.clientX
+    startY = e.clientY
+    zoomImg.style.cursor = 'grabbing'
+    e.preventDefault()
+  })
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return
+
+    const dx = e.clientX - startX
+    const dy = e.clientY - startY
+
+    zoomImg.style.transform = `translate(${translateX + dx}px, ${translateY + dy}px) scale(${scale})`
+  })
+
+  document.addEventListener('mouseup', (e) => {
+    if (!isDragging) return
+    isDragging = false
+    zoomImg.style.cursor = 'grab'
+
+    const dx = e.clientX - startX
+    const dy = e.clientY - startY
+    if(scale != 1) translateX += dx
+    translateY += dy
+    applyTransform()
+  })
+
+  zoomContainer.addEventListener('wheel', (e) => {
+    const step = 0.2
+    if (e.deltaY < 0) scale += step
+    else if (e.deltaY > 0) scale -= step
+    if (scale < 1) scale = 1
+    if (scale > 5) scale = 5
+    if (scale === 1) {
+      translateX = 0
+      translateY = 0
+    }
+    applyTransform()
+  }, { passive: true })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  addDragAndDrop()
+  console.log('oi');
+  
+  addHeader()
+})
+
+</script>
+</html>
