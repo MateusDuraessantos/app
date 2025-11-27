@@ -6,7 +6,7 @@ export const addHeader = () => {
     </div>
 
     <button class="header__hamburger" id="hamburger" aria-label="Menu hamburguer">
-      <img width="20" width="40" src="../assets/icones/hamburger.svg" loading="lazy" alt="Menu hamburger" />
+      <img width="20" width="40" src="./assets/icones/perfil.svg" loading="lazy" alt="Menu hamburger" />
     </button>
     
     <div class="header__right" closable="true" id="id-header" aria-expanded="false">
@@ -15,6 +15,11 @@ export const addHeader = () => {
       <div class="header__container">
         <div class="header__links">
         <buttton class="header__link" href="/#inicio">Perfil</buttton>
+        <buttton class="header__link" href="/#inicio">Criar novo alerta</buttton>
+        <buttton class="header__link" href="/#inicio">Notícias</buttton>
+        <buttton class="header__link" href="/#inicio">Configurações</buttton>
+        <br />
+        <buttton class="header__link" href="/#inicio">Sair</buttton>
       </div>
     </div>
   `
